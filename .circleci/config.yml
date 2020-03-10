@@ -21,11 +21,7 @@ jobs:
       - image: circleci/node:13.10.1
     steps:
       - checkout
-      - setup_remote_docker
-
-      - run:
-          name: Compose up
-          command: docker-compose up
+      
       - run: 
           name: Unit tests
           command: yarn unit 
