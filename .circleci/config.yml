@@ -22,7 +22,9 @@ jobs:
       - image: circleci/node:13.10.1
     steps:
       - checkout
-
+      - run:
+          name: Install all dependencies
+          command: yarn install
       - run: 
           name: Unit tests
           command: yarn unit 
