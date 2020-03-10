@@ -9,7 +9,7 @@ jobs:
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
-          name: Install all dependencies
+          name: Install dependencies
           command: yarn install
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
@@ -23,11 +23,30 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install all dependencies
+          name: Install dependencies
           command: yarn install
       - run: 
-          name: Unit tests
+          name: unit tests
           command: yarn unit 
+
+  functionnal_tests:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/node:13.10.1
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: yarn install
+      - run:
+          name: Compose up
+          command: docker-compose up
+      - run:
+          name: Execute database migrations
+          command: docker-compose exec server node migrations.js up
+      - run:
+          name: e2e tests
+          command: yarn e2e
 
 workflows:
   version: 2
