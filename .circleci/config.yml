@@ -21,7 +21,7 @@ jobs:
       - image: circleci/node:13.10.1
     steps:
       - checkout
-      
+
       - run: 
           name: Unit tests
           command: yarn unit 
@@ -31,5 +31,7 @@ workflows:
   build_and_test:
     jobs:
       - build
-      - unit_tests
+      - unit_tests:
+          requires:
+            - build
                     
