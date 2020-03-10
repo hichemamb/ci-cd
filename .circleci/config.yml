@@ -56,4 +56,7 @@ workflows:
       - unit_tests:
           requires:
             - build
+      - functionnal_tests:
+          requires:
+            - build
                     
