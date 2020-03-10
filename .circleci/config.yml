@@ -41,7 +41,7 @@ jobs:
           command: yarn install
       - run:
           name: Compose up
-          command: docker-compose up -d
+          command: docker-compose up
       - run:
           name: Execute database migrations
           command: docker-compose exec server node migrations.js up
